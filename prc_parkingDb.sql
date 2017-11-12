@@ -77,11 +77,20 @@ DELIMITER %%
     call prc_editVehicule('abc123');
     call prc_rmVehicule('abc123');
   -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
-    DROP PROCEDURE IF EXISTS prc_getPazaEstado;
+    DROP PROCEDURE IF EXISTS prc_getPlazaEstado;
     DELIMITER %%
-    CREATE PROCEDURE prc_editVehicule (IN id INT(11))
+    CREATE PROCEDURE prc_getPlazaEstado (IN id INT(11))
     BEGIN
       SELECT estado FROM plazas WHERE plazas.id = id;
     END
     %%
-    call prc_editVehicule('abc123');
+    call prc_getPlazaEstado(1);
+    -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    DROP TRIGGER IF EXISTS trg_setPlaza;
+    DELIMITER %%
+      CREATE TRIGGER trg_setPlaza -- nombre del trigger
+      AFTER INSERT --  Antes de borrar
+      ON vehiculos FOR EACH ROW
+      BEGIN
+          UPDATE plazas SET estado = true WHERE id=NEW.idPlaza;
+      END;
