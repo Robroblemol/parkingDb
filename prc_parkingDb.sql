@@ -40,7 +40,7 @@ BEGIN
   SELECT * FROM vehiculos WHERE vehiculos.placa = placa;
 END
 %%
-call prc_getVehicule ('abc123');
+call prc_getVehicle ('abc123');
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
 
 DROP PROCEDURE IF EXISTS prc_rmVehicule;
@@ -66,7 +66,7 @@ DELIMITER %%
       VALUES (OLD.id,OLD.idPlaza,OLD.placa,OLD.fecha_ent,fecha_actual);
   END;
     call prc_rmVehicule('abc123');
-  -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
     DROP PROCEDURE IF EXISTS prc_editVehicule;
     DELIMITER %%
     CREATE PROCEDURE prc_editVehicule (IN placa VARCHAR(15),idPlaza INT(11))
@@ -74,4 +74,14 @@ DELIMITER %%
       UPDATE vehiculos SET vehiculos.idPlaza=idPlaza WHERE vehiculos.placa = placa;
     END
     %%
-    call prc_editVehicule('abc123',5);
+    call prc_editVehicule('abc123');
+    call prc_rmVehicule('abc123');
+  -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
+    DROP PROCEDURE IF EXISTS prc_getPazaEstado;
+    DELIMITER %%
+    CREATE PROCEDURE prc_editVehicule (IN id INT(11))
+    BEGIN
+      SELECT estado FROM plazas WHERE plazas.id = id;
+    END
+    %%
+    call prc_editVehicule('abc123');
