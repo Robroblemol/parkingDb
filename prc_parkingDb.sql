@@ -11,7 +11,8 @@ INSERT INTO plazas (estado) VALUES (false);
 DROP TABLE IF EXISTS vehiculos;
 create table vehiculos (id INT (11) NOT NULL AUTO_INCREMENT,
                         idPlaza INT(11)NOT NULL,placa VARCHAR(15) NOT NULL,
-                        fecha_ent DATETIME, PRIMARY KEY (id), FOREIGN KEY(idPlaza) REFERENCES plazas(id));
+                        fecha_ent DATETIME, PRIMARY KEY (id),
+                        FOREIGN KEY(idPlaza) REFERENCES plazas(id));
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
 DROP TABLE IF EXISTS nopresentes;
 create table nopresentes (id INT (11) NOT NULL,
@@ -19,9 +20,20 @@ create table nopresentes (id INT (11) NOT NULL,
                         fecha_ent DATETIME, fecha_sal DATETIME, PRIMARY KEY (id));
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   ALTER TABLE vehiculos ADD tipo BOOLEAN;
-
-
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<
+DROP TABLE IF EXISTS plazaMotos;
+create table plazaMotos (id INT (11) NOT NULL AUTO_INCREMENT,
+                        estado BOOLEAN, PRIMARY KEY (id));
+INSERT INTO plazaMotos (estado) VALUES (false);
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+DROP TABLE IF EXISTS motos;
+create table motos (id INT (11) NOT NULL AUTO_INCREMENT,
+                        idPlaza INT(11)NOT NULL,placa VARCHAR(15) NOT NULL,
+                        fecha_ent DATETIME, PRIMARY KEY (id),
+                        FOREIGN KEY(idPlaza) REFERENCES plazaMotos(id));
+
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>
 DROP PROCEDURE IF EXISTS prc_addVehicule;
 DELIMITER %%
 CREATE PROCEDURE prc_addVehicule (idPlaza int (11), placa VARCHAR (15),
@@ -32,7 +44,7 @@ BEGIN
 END
 %%
 
-call prc_addVehicule(1,'abc123',(SELECT NOW()));
+call prc_addVehicule(1,'abc123',(SELECT NOW()),false);
 
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>>
 
