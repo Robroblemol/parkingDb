@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS plazas;
 
 create table plazas (id INT(11)NOT NULL AUTO_INCREMENT,
                       estado BOOLEAN NOT NULL,PRIMARY KEY(id));
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 DROP TABLE IF EXISTS vehiculos;
 create table vehiculos (id INT (11) NOT NULL AUTO_INCREMENT,
                         idPlaza INT(11)NOT NULL,placa VARCHAR(15) NOT NULL,
@@ -64,4 +65,13 @@ DELIMITER %%
       INSERT INTO nopresentes(id,idPlaza,placa,fecha_ent,fecha_sal)
       VALUES (OLD.id,OLD.idPlaza,OLD.placa,OLD.fecha_ent,fecha_actual);
   END;
+    call prc_rmVehicule('abc123');
+  -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    DROP PROCEDURE IF EXISTS prc_editVehicule;
+    DELIMITER %%
+    CREATE PROCEDURE prc_editVehicule (IN placa VARCHAR(15),idPlaza INT(11))
+    BEGIN
+      UPDATE vehiculos SET vehiculos.idPlaza=idPlaza WHERE vehiculos.placa = placa;
+    END
     %%
+    call prc_editVehicule('abc123',5);
