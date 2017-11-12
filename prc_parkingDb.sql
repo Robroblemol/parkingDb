@@ -32,6 +32,19 @@ create table motos (id INT (11) NOT NULL AUTO_INCREMENT,
                         idPlaza INT(11)NOT NULL,placa VARCHAR(15) NOT NULL,
                         fecha_ent DATETIME, PRIMARY KEY (id),
                         FOREIGN KEY(idPlaza) REFERENCES plazaMotos(id));
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<
+
+DROP PROCEDURE IF EXISTS prc_addMoto;
+DELIMITER %%
+CREATE PROCEDURE prc_addMoto (idPlaza int (11), placa VARCHAR (15),
+                                  fecha_ent DATETIME)
+BEGIN
+  INSERT INTO  motos (idPlaza,placa,fecha_ent)
+  VALUES (idPlaza,placa,fecha_ent);
+END
+%%
+
+call prc_addMoto(1,'ab123c',(SELECT NOW()));
 
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>
 DROP PROCEDURE IF EXISTS prc_addVehicule;
@@ -47,7 +60,15 @@ END
 call prc_addVehicule(1,'abc123',(SELECT NOW()),false);
 
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>>
-
+DROP PROCEDURE IF EXISTS prc_getMoto;
+DELIMITER %%
+CREATE PROCEDURE prc_getMoto (IN placa VARCHAR(15))
+BEGIN
+  SELECT * FROM motos WHERE motos.placa = placa;
+END
+%%
+call prc_getMoto ('ab123c');
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<>>
 DROP PROCEDURE IF EXISTS prc_getVehicule;
 DELIMITER %%
 CREATE PROCEDURE prc_getVehicule (IN placa VARCHAR(15))
@@ -57,7 +78,15 @@ END
 %%
 call prc_getVehicle ('abc123');
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
-
+DROP PROCEDURE IF EXISTS prc_rmMoto;
+DELIMITER %%
+CREATE PROCEDURE prc_rmMoto (IN placa VARCHAR(15))
+BEGIN
+  DELETE FROM motos WHERE motos.placa = placa;
+END
+%%
+call prc_rmMoto('ab789c');
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<
 DROP PROCEDURE IF EXISTS prc_rmVehicule;
 DELIMITER %%
 CREATE PROCEDURE prc_rmVehicule (IN placa VARCHAR(15))
@@ -81,6 +110,21 @@ DELIMITER %%
       VALUES (OLD.id,OLD.idPlaza,OLD.placa,OLD.fecha_ent,fecha_actual);
   END;
     call prc_rmVehicule('abc123');
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+DROP TRIGGER IF EXISTS trg_nopresenteMoto;
+DELIMITER %%
+  CREATE TRIGGER trg_nopresenteMoto -- nombre del trigger
+  BEFORE DELETE --  Antes de borrar
+  ON motos FOR EACH ROW
+  BEGIN
+      DECLARE fecha_actual DATETIME;
+      SELECT NOW() INTO fecha_actual;
+      INSERT INTO nopresentes(id,idPlaza,placa,fecha_ent,fecha_sal)
+      VALUES (OLD.id,OLD.idPlaza,OLD.placa,OLD.fecha_ent,fecha_actual);
+  END;
+    %%
+
+    call prc_rmMoto('ab789c');
   -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
     DROP PROCEDURE IF EXISTS prc_editVehicule;
     DELIMITER %%
