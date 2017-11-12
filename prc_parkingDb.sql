@@ -94,3 +94,13 @@ DELIMITER %%
       BEGIN
           UPDATE plazas SET estado = true WHERE id=NEW.idPlaza;
       END;
+      %%
+  -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  DROP PROCEDURE IF EXISTS prc_getNopresente;
+  DELIMITER %%
+  CREATE PROCEDURE prc_getNopresente(IN placa VARCHAR (15))
+  BEGIN
+    SELECT * FROM nopresentes WHERE nopresentes.placa = placa;
+  END
+  %%
+  call prc_getNopresente('abc123');
