@@ -49,4 +49,19 @@ BEGIN
   DELETE FROM vehiculos WHERE vehiculos.placa = placa;
 END
 %%
-call prc_rmVehicle('abc123');
+call prc_rmVehicule('abc123');
+
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<
+
+DROP TRIGGER IF EXISTS trg_nopresente;
+DELIMITER %%
+  CREATE TRIGGER trg_nopresente -- nombre del trigger
+  BEFORE DELETE --  Antes de borrar
+  ON vehiculos FOR EACH ROW
+  BEGIN
+      DECLARE fecha_actual DATETIME;
+      SELECT NOW() INTO fecha_actual;
+      INSERT INTO nopresentes(id,idPlaza,placa,fecha_ent,fecha_sal)
+      VALUES (OLD.id,OLD.idPlaza,OLD.placa,OLD.fecha_ent,fecha_actual);
+  END;
+    %%
