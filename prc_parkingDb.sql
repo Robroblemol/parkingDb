@@ -40,7 +40,7 @@ BEGIN
   SELECT * FROM vehiculos WHERE vehiculos.placa = placa;
 END
 %%
-call prc_getVehicle ('abc123');
+call prc_getVehicule ('abc123');
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
 
 DROP PROCEDURE IF EXISTS prc_rmVehicule;
