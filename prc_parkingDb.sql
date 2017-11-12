@@ -20,10 +20,12 @@ create table nopresentes (id INT (11) NOT NULL,
                         fecha_ent DATETIME, fecha_sal DATETIME, PRIMARY KEY (id));
 
 
-DROP PROCEDURE IF EXISTS prc_actualizarVehicule;
+DROP PROCEDURE IF EXISTS prc_addVehicule;
 DELIMITER %%
-CREATE PROCEDURE prc_actualizarVehicule (idPlaza int (11), placa VARCHAR (15), fecha_ent DATETIME)
+CREATE PROCEDURE prc_addVehicule (idPlaza int (11), placa VARCHAR (15), fecha_ent DATETIME)
 BEGIN
   INSERT INTO  vehiculos (idPlaza,placa,fecha_ent) VALUES (idPlaza,placa,fecha_ent);
 END
 %%
+
+call prc_addVehicule(1,'abc123',(SELECT NOW()));
