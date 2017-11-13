@@ -111,7 +111,10 @@ DELIMITER %%
       SELECT NOW() INTO fecha_actual;
       INSERT INTO nopresentes(id,idPlaza,placa,fecha_ent,fecha_sal)
       VALUES (OLD.id,OLD.idPlaza,OLD.placa,OLD.fecha_ent,fecha_actual);
+      UPDATE plazas SET estado = false WHERE plazas.id= OLD.idPlaza;
+
   END;
+  %%
     call prc_rmVehicule('abc123');
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 DROP TRIGGER IF EXISTS trg_nopresenteMoto;
@@ -124,6 +127,7 @@ DELIMITER %%
       SELECT NOW() INTO fecha_actual;
       INSERT INTO nopresentes(id,idPlaza,placa,fecha_ent,fecha_sal)
       VALUES (OLD.id,OLD.idPlaza,OLD.placa,OLD.fecha_ent,fecha_actual);
+      UPDATE plazaMotos SET estado = false WHERE plazaMotos.id= OLD.idPlaza;
   END;
     %%
 
