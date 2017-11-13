@@ -53,3 +53,20 @@ int getIdSQLPlaca(String pl){
   }
   return msql.getInt(2);
 }
+void getVehicleSQL(String pl ) {
+  if(pl.equals("*")==false){
+    if(!flagMoto){
+      msql.query("CALL prc_getVehicule('"+pl+"')");
+      msql.next();
+      }else{
+        msql.query("CALL prc_getMoto('"+pl+"')");
+        msql.next();
+      }
+  }else{
+  }
+  String s = "Id: "+ msql.getString(1)+" N° Plaza: "+
+  msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
+  " Fecha entrada: "+msql.getString(4)+"\n";
+  txa1.setText(s);
+
+}
