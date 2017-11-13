@@ -25,10 +25,14 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
   void builPlaza(String text){
       if(text.equals("carro")==true) l=lengthAuto;
       for(int i=0;i<l;i++){
-        if(text.equals("carro")==true)
+        if(text.equals("carro")==true){
           arrayAuto.add(p = pCreator.newPlaza(text,intXPos+(factoX*i),intYPos));
-        else if (text.equals("moto")==true)
+          getEstadoDb(i+1,true);
+        }
+        else if (text.equals("moto")==true){
           arrayMoto.add(p = pCreator.newPlaza(text,intXPos+(factoX*i),intYPos+factoY));
+          getEstadoDb(i+1,false);
+        }
       }
       if(text.equals("carro")==true){
         text="moto";
@@ -67,5 +71,16 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
       arrayAuto.get(i).setEstado(es);
     else
       arrayMoto.get(i).setEstado(es);
+  }
+  Boolean getEstadoDb(int i,boolean f){// estado de las plazas
+    String s;
+    if (f) s = "SELECT estado FROM plazas WHERE id="+i;
+    else   s = "SELECT estado FROM plazaMotos WHERE id="+i;
+    msql.query(s);
+    msql.next();
+    Boolean stts = msql.getBoolean(1);
+    println("estado Plaza "+i+": "+stts);
+    return stts;
+
   }
 }
