@@ -10,9 +10,9 @@ class PlazaMoto implements Plaza{
   }
   void drawPlaza(){
     if(estado)
-      c = color(51,255,54);
-    else
       c = color(218,1,19);
+    else
+      c = color(51,255,54);
     fill (c);//color rojo
     noStroke();
     rect(xPos,yPos,xArea,yArea);
