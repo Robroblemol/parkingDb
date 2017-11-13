@@ -81,8 +81,22 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
     msql.query(s);
     msql.next();
     Boolean stts = msql.getBoolean(1);
-    println("estado Plaza "+i+": "+stts);
+    //println("estado Plaza "+i+": "+stts);
     return stts;
 
+  }
+  int getFreePlaza(boolean f){
+    int free = 0;
+    for(int i = 1;i<=getLength(f);i++){
+      if(f){
+        if(!arrayAuto.get(i).getEstado())
+          free = i;
+      }else{
+        if(!arrayMoto.get(i).getEstado())
+          free = i;
+      }
+    }
+    println("free: "+free);
+    return free;
   }
 }
