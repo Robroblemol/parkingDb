@@ -21,5 +21,5 @@ initGui();
 }
 void draw(){
   background(0);
-  showText();
+  showGUIProcessing();
 }
