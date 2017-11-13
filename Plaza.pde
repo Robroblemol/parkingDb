@@ -3,6 +3,8 @@ interface Plaza {
   float getXPos();
   float getYPos();
   color getColor();
+  Boolean getEstado();
+  void setEstado();
   void setColor(color c);
   void setXpos(float xPos);
   void setYpos(float yPos);

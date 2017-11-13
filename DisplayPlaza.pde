@@ -62,5 +62,10 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
     else
       return lengthMoto;
   }
-
+  void setEstado(Boolean f,Boolean es,int i) {
+    if (f)
+      arrayAuto.get(i).setEstado(es);
+    else
+      arrayMoto.get(i).setEstado(es);
+  }
 }
