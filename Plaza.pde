@@ -4,7 +4,7 @@ interface Plaza {
   float getYPos();
   color getColor();
   Boolean getEstado();
-  void setEstado();
+  void setEstado(Boolean f);
   void setColor(color c);
   void setXpos(float xPos);
   void setYpos(float yPos);
