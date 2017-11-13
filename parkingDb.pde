@@ -9,7 +9,7 @@ void setup( ) {
 msql = new MySQL( this, "localhost:3306", database, user, pass );
 if ( msql.connect() ){
   //msql.query("CALL prc_addVehicule(1,'abc123',(SELECT NOW()))");
-  msql.query("CALL prc_getVehicule('abc123')");
+  msql.query("CALL prc_getVehicule('abc456')");
   msql.next();
   println("id: "+ msql.getString(1));
   println("idPlaza: "+msql.getString(2));

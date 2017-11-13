@@ -15,6 +15,7 @@ create table vehiculos (id INT (11) NOT NULL AUTO_INCREMENT,
                         FOREIGN KEY(idPlaza) REFERENCES plazas(id));
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
   ALTER TABLE vehiculos ADD UNIQUE (placa);
+  ALTER TABLE vehiculos ADD UNIQUE (idPlaza);
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
 DROP TABLE IF EXISTS nopresentes;
 create table nopresentes (id INT (11) NOT NULL,
@@ -36,6 +37,7 @@ create table motos (id INT (11) NOT NULL AUTO_INCREMENT,
                         FOREIGN KEY(idPlaza) REFERENCES plazaMotos(id));
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<
 ALTER TABLE motos ADD UNIQUE (placa);
+ALTER TABLE motos ADD UNIQUE (idPlaza);
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 DROP PROCEDURE IF EXISTS prc_addMoto;
 DELIMITER %%
