@@ -87,7 +87,7 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
   }
   int getFreePlaza(boolean f){
     int free = 0;
-    for(int i = 1;i<=getLength(f);i++){
+    for(int i = 0;i<getLength(f);i++){
       if(f){
         if(!arrayAuto.get(i).getEstado())
           free = i;
