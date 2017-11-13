@@ -17,3 +17,16 @@ void addSQL( ) {
     //msql.next();
   }
 }
+int getNPLazaSQL (Boolean f){// devuelve el numero de plazas
+  //int length;
+  if(f){
+    msql.query("SELECT Count (*) FROM plazas");//carro
+    msql.next();
+  }else{
+    msql.query("SELECT Count (*) FROM plazaMotos");
+    msql.next();
+  }
+  return msql.getInt(1);
+  //length=msql.getInt(1);
+
+}

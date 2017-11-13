@@ -10,12 +10,8 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
   DisplayPlaza(float xPos, float yPos){
     intXPos = xPos;
     intYPos = yPos;
-    msql.query("SELECT Count (*) FROM plazas");
-    msql.next();
-    lengthAuto = msql.getInt(1);
-    msql.query("SELECT Count (*) FROM plazaMotos");
-    msql.next();
-    lengthMoto = msql.getInt(1);
+    lengthAuto = getNPLazaSQL(true);
+    lengthMoto = getNPLazaSQL(false);
   //  println("lengthMoto: "+lengthMoto);
   //    println("lengthAuto: "+lengthAuto);
   pCreator = new ConcretePlaza();
