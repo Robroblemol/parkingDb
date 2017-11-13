@@ -45,5 +45,6 @@ Boolean getEstado(){
 }
 void setEstado(Boolean f) {
   estado=f;
+//  println("estado: "+estado);
 }
 }

@@ -49,9 +49,11 @@ public void handleButtonEvents(GButton button, GEvent event) {
   if(button==bAdd&&event==GEvent.PRESSED){
     println("Me presionaron!! ");
     int p = dP.getFreePlaza(true);
-    String s = "CALL prc_addVehicule(8,'"+txfPlaca.getText()+"',(SELECT NOW()))";
-    //msql.query(s);
-    //msql.next();
+    String s = "CALL prc_addVehicule("+p+",'"+txfPlaca.getText()+"',(SELECT NOW()))";
+    dP.setEstado(true,true,p);
+    println(s);
+  //  msql.query(s);
+  //  msql.next();
   }
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
