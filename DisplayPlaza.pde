@@ -26,12 +26,14 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
       if(text.equals("carro")==true) l=lengthAuto;
       for(int i=0;i<l;i++){
         if(text.equals("carro")==true){
-          arrayAuto.add(p = pCreator.newPlaza(text,intXPos+(factoX*i),intYPos));
-          getEstadoDb(i+1,true);
+          p = pCreator.newPlaza(text,intXPos+(factoX*i),intYPos);
+          p.setEstado(getEstadoDb(i+1,true));
+          arrayAuto.add(p);
         }
         else if (text.equals("moto")==true){
-          arrayMoto.add(p = pCreator.newPlaza(text,intXPos+(factoX*i),intYPos+factoY));
-          getEstadoDb(i+1,false);
+          p = pCreator.newPlaza(text,intXPos+(factoX*i),intYPos+factoY);
+          p.setEstado(getEstadoDb(i+1,false));
+          arrayMoto.add(p);
         }
       }
       if(text.equals("carro")==true){
