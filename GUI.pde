@@ -55,8 +55,12 @@ void createControlGruop( ) {
 }
 public void handleButtonEvents(GButton button, GEvent event) {
   if(button==bAdd&&event==GEvent.PRESSED){
-    println("Me presionaron!! ");
+    println("bAdd> Me presionaron!! ");
     addSQL();
+  }
+  if(button==bRm&&event==GEvent.PRESSED){
+    println("bRm> Me presionaron!! ");
+    rmSQLVehicle(txfPlaca.getText());
   }
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {

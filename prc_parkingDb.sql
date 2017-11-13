@@ -20,7 +20,7 @@ create table vehiculos (id INT (11) NOT NULL AUTO_INCREMENT,
 DROP TABLE IF EXISTS nopresentes;
 create table nopresentes (id INT (11) NOT NULL,
                         idPlaza INT(11)NOT NULL,placa VARCHAR(15) NOT NULL,
-                        fecha_ent DATETIME, fecha_sal DATETIME, PRIMARY KEY (id));
+                        fecha_ent DATETIME, fecha_sal DATETIME);
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   ALTER TABLE vehiculos ADD tipo BOOLEAN;
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<

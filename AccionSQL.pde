@@ -18,7 +18,6 @@ void addSQL( ) {
   }
 }
 int getNPLazaSQL (Boolean f){// devuelve el numero de plazas
-  //int length;
   if(f){
     msql.query("SELECT Count (*) FROM plazas");//carro
     msql.next();
@@ -27,6 +26,16 @@ int getNPLazaSQL (Boolean f){// devuelve el numero de plazas
     msql.next();
   }
   return msql.getInt(1);
-  //length=msql.getInt(1);
+}
 
+void rmSQLVehicle(String pl) {
+  String s;
+  if(!flagMoto){
+     s = "CALL prc_rmVehicule('"+pl+"')";
+  }else{
+     s = "CALL prc_rmMoto('"+pl+"')";
+  }
+  println(s);
+  msql.query(s);
+  msql.next();
 }
