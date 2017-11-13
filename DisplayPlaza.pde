@@ -95,8 +95,10 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
           break;
         }
       }else{
-        if(!arrayMoto.get(i).getEstado())
+        if(!arrayMoto.get(i).getEstado()){
           free = i;
+          break;
+        }
       }
     }
     println("free: "+free);

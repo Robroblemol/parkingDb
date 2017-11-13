@@ -3,6 +3,8 @@ import g4p_controls.*;//importamos libreria
 GLabel lbTitle,lbEditVehiculo,lbBorrar,lbgetVehiculo;
 GButton bAdd,bSelect,bRm,bEdit;
 GTextField txfPlaca;
+GOption optMoto;
+Boolean flagMoto = false;
 PlazaCreator pCreator;
 Plaza  pA,pM;
 DisplayPlaza dP;
@@ -31,6 +33,12 @@ void createControlGruop( ) {
   txfPlaca.tag = "txfPlaca";
   txfPlaca.setPromptText("Digite Placa");
 
+  optMoto = new GOption(this,190,80,80,24,"Tipo Moto");
+  optMoto.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  optMoto.setOpaque(false);
+  optMoto.addEventHandler(this, "option1_clicked1");
+
+
 }
  void showGUIProcessing() {
   fill(255);
@@ -48,10 +56,19 @@ void createControlGruop( ) {
 public void handleButtonEvents(GButton button, GEvent event) {
   if(button==bAdd&&event==GEvent.PRESSED){
     println("Me presionaron!! ");
-    int p = dP.getFreePlaza(true);
-    String s = "CALL prc_addVehicule("+p+",'"+txfPlaca.getText()+"',(SELECT NOW()))";
-    dP.setEstado(true,true,p);
-    if(p>0){
+    String s;
+    int p;
+    if(!flagMoto){
+      p = dP.getFreePlaza(true);
+      s = "CALL prc_addVehicule("+p+",'"+txfPlaca.getText()+"',(SELECT NOW()))";
+      dP.setEstado(true,true,p);
+    }
+    else{
+      p = dP.getFreePlaza(false);
+      s = "CALL prc_addMoto("+p+",'"+txfPlaca.getText()+"',(SELECT NOW()))";
+      dP.setEstado(false,true,p);
+    }
+    if(p>=0){
       println(s);
       //msql.query(s);
       //msql.next();
@@ -60,3 +77,13 @@ public void handleButtonEvents(GButton button, GEvent event) {
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
 }
+public void option1_clicked1(GOption source, GEvent event) { //_CODE_:option2:240467:
+  //println("option2 - GOption >> GEvent." + event + " @ " + millis());
+  flagMoto = optMoto.isSelected();
+  println("flagMoto: "+flagMoto);
+}
+public void handleToggleControlEvents(GToggleControl option, GEvent event) {
+  if(option==optMoto&&event==GEvent.PRESSED){
+
+  }
+ }
