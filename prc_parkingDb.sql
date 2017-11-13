@@ -124,7 +124,7 @@ DELIMITER %%
   END;
     %%
 
-    call prc_rmMoto('ab789c');
+    call prc_rmMoto('ab123c');
   -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
     DROP PROCEDURE IF EXISTS prc_editVehicule;
     DELIMITER %%
@@ -133,8 +133,17 @@ DELIMITER %%
       UPDATE vehiculos SET vehiculos.idPlaza=idPlaza WHERE vehiculos.placa = placa;
     END
     %%
-    call prc_editVehicule('abc123');
+    call prc_editVehicule('abc123',5);
     call prc_rmVehicule('abc123');
+    -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<
+    DROP PROCEDURE IF EXISTS prc_editMoto;
+    DELIMITER %%
+    CREATE PROCEDURE prc_editMoto (IN placa VARCHAR(15),idPlaza INT(11))
+    BEGIN
+      UPDATE motos SET motos.idPlaza=idPlaza WHERE motos.placa = placa;
+    END
+    %%
+      call prc_editMoto('ab123c',5);
   -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
     DROP PROCEDURE IF EXISTS prc_getPlazaEstado;
     DELIMITER %%
@@ -145,6 +154,15 @@ DELIMITER %%
     %%
     call prc_getPlazaEstado(1);
     -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    DROP PROCEDURE IF EXISTS prc_getPlazaEstadoMoto;
+    DELIMITER %%
+    CREATE PROCEDURE prc_getPlazaEstadoMoto (IN id INT(11))
+    BEGIN
+      SELECT estado FROM plazaMotos WHERE plazaMotos.id = id;
+    END
+    %%
+    call prc_getPlazaEstadoMoto(1);
+    -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     DROP TRIGGER IF EXISTS trg_setPlaza;
     DELIMITER %%
       CREATE TRIGGER trg_setPlaza -- nombre del trigger
@@ -154,6 +172,16 @@ DELIMITER %%
           UPDATE plazas SET estado = true WHERE id=NEW.idPlaza;
       END;
       %%
+  -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>
+  DROP TRIGGER IF EXISTS trg_setPlazaMoto;
+  DELIMITER %%
+    CREATE TRIGGER trg_setPlazaMoto -- nombre del trigger
+    AFTER INSERT --  Antes de borrar
+    ON motos FOR EACH ROW
+    BEGIN
+        UPDATE plazaMotos SET estado = true WHERE id=NEW.idPlaza;
+    END;
+    %%
   -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   DROP PROCEDURE IF EXISTS prc_getNopresente;
   DELIMITER %%
@@ -163,3 +191,4 @@ DELIMITER %%
   END
   %%
   call prc_getNopresente('abc123');
+  -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>
