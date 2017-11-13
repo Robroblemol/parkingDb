@@ -89,7 +89,7 @@ ArrayList<Plaza> arrayAuto = new ArrayList<Plaza>();
     int free = 0;
     for(int i = 0;i<getLength(f);i++){
       if(f){
-        println("plaza "+i+" = "+arrayAuto.get(i).getEstado());
+      //    println("plaza "+i+" = "+arrayAuto.get(i).getEstado());
         if(!arrayAuto.get(i).getEstado()){
           free = i;
           break;

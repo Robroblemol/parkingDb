@@ -51,9 +51,11 @@ public void handleButtonEvents(GButton button, GEvent event) {
     int p = dP.getFreePlaza(true);
     String s = "CALL prc_addVehicule("+p+",'"+txfPlaca.getText()+"',(SELECT NOW()))";
     dP.setEstado(true,true,p);
-    println(s);
-  //  msql.query(s);
-  //  msql.next();
+    if(p>0){
+      println(s);
+      //msql.query(s);
+      //msql.next();
+    }
   }
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
