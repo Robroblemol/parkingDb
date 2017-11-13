@@ -5,6 +5,7 @@ GButton bAdd,bSelect,bRm,bEdit;
 GTextField txfPlaca;
 PlazaCreator pCreator;
 Plaza  pA,pM;
+DisplayPlaza dP;
 
 void initGui( ) {
   G4P.setGlobalColorScheme(GCScheme.RED_SCHEME);
@@ -13,6 +14,7 @@ void initGui( ) {
   pCreator = new ConcretePlaza();
   pA = pCreator.newPlaza("carro",90,220);
   pM = pCreator.newPlaza("moto",90,320);
+  dP=new DisplayPlaza(90,220);
   createControlGruop();
 }
 void createControlGruop( ) {
@@ -38,8 +40,9 @@ void createControlGruop( ) {
   textSize(25);
   text("Plazas Disponibles Automovil",90, 200);
   text("Plazas Disponibles Moto",90, 300);
-  pA.drawPlaza();
-  pM.drawPlaza();
+  dP.drawAllPlaza(true);
+  //pA.drawPlaza();
+  //pM.drawPlaza();
 
 }
 public void handleButtonEvents(GButton button, GEvent event) {
