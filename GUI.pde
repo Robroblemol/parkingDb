@@ -4,6 +4,7 @@ GLabel lbTitle,lbEditVehiculo,lbBorrar,lbgetVehiculo;
 GButton bAdd,bSelect,bRm,bEdit;
 GTextField txfPlaca;
 GOption optMoto;
+GTextArea txa1;
 Boolean flagMoto = false;
 PlazaCreator pCreator;
 Plaza  pA,pM;
@@ -37,6 +38,10 @@ void createControlGruop( ) {
   optMoto.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   optMoto.setOpaque(false);
   optMoto.addEventHandler(this, "option1_clicked1");
+
+  txa1 = new GTextArea(this, 70, 360, 500, 135,G4P.SCROLLBARS_BOTH);
+  txa1.tag = "txa1";
+  txa1.setPromptText("No se ha buscado nada");
 
 
 }
