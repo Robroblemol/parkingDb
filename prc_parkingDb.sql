@@ -40,7 +40,7 @@ ALTER TABLE motos ADD UNIQUE (placa);
 DROP PROCEDURE IF EXISTS prc_addMoto;
 DELIMITER %%
 CREATE PROCEDURE prc_addMoto (idPlaza int (11), placa VARCHAR (15),
-                                  fecha_ent DATETIME)
+                              fecha_ent DATETIME)
 BEGIN
   INSERT INTO  motos (idPlaza,placa,fecha_ent)
   VALUES (idPlaza,placa,fecha_ent);
