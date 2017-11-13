@@ -46,7 +46,12 @@ void createControlGruop( ) {
 
 }
 public void handleButtonEvents(GButton button, GEvent event) {
-
+  if(button==bAdd&&event==GEvent.PRESSED){
+    println("Me presionaron!! ");
+    String s = "CALL prc_addVehicule(8,'"+txfPlaca.getText()+"',(SELECT NOW()))";
+    msql.query(s);
+    msql.next();
+  }
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
 }
