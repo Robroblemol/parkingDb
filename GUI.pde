@@ -5,6 +5,7 @@ GButton bAdd,bSelect,bRm,bEdit;
 GTextField txfPlaca;
 GOption optMoto;
 GTextArea txa1;
+GWindow window;
 Boolean flagMoto = false;
 PlazaCreator pCreator;
 Plaza  pA,pM;
@@ -28,7 +29,7 @@ void createControlGruop( ) {
   bRm = new GButton(this,290,125,100,35,"Borrar");
   bRm.fireAllEvents(true);
   bEdit = new GButton(this,400,125,100,35,"Modificar Plaza");
-
+  bEdit.fireAllEvents(true);
 
   txfPlaca = new GTextField(this, 70, 80, 100, 20);
   txfPlaca.tag = "txfPlaca";
@@ -42,7 +43,6 @@ void createControlGruop( ) {
   txa1 = new GTextArea(this, 70, 360, 500, 135,G4P.SCROLLBARS_BOTH);
   txa1.tag = "txa1";
   txa1.setPromptText("No se ha buscado nada");
-
 
 }
  void showGUIProcessing() {
@@ -71,6 +71,20 @@ public void handleButtonEvents(GButton button, GEvent event) {
     println("bSelect: Me presionaron!! ");
     getVehicleSQL(txfPlaca.getText());
   }
+  if(button==bEdit &&event==GEvent.PRESSED){
+    window = GWindow.getWindow(this, "Mover Plaza", 0, 0, 480, 230, JAVA2D);
+    window.addDrawHandler(this, "drawWin");
+    GTextField txfPlacaMod = new GTextField(window,10,60,100,20);
+    txfPlacaMod.setPromptText("Digite Placa");
+    GTextField txfIdPlazaMod = new GTextField(window,150,60,100,20);
+    txfIdPlazaMod.setPromptText("nueva ubicacion");
+    GButton bAplica = new GButton(window,80,125,100,35,"Aplicar");
+    bAplica.fireAllEvents(true);
+    GLabel ldMod= new GLabel(window,0,10,250,25);
+    ldMod.setText("ingrese Vehiculo a mover y plaza nueva");
+
+    //modSQL();
+  }
 
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
@@ -81,7 +95,5 @@ public void option1_clicked1(GOption source, GEvent event) { //_CODE_:option2:24
   println("flagMoto: "+flagMoto);
 }
 public void handleToggleControlEvents(GToggleControl option, GEvent event) {
-  if(option==optMoto&&event==GEvent.PRESSED){
 
-  }
  }
