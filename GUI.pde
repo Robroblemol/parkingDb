@@ -72,15 +72,15 @@ public void handleButtonEvents(GButton button, GEvent event) {
     getVehicleSQL(txfPlaca.getText());
   }
   if(button==bEdit &&event==GEvent.PRESSED){
-    window = GWindow.getWindow(this, "Mover Plaza", 0, 0, 480, 230, JAVA2D);
+    window = GWindow.getWindow(this, "Mover Plaza", 500, 250, 245, 230, JAVA2D);
     window.addDrawHandler(this, "drawWin");
-    GTextField txfPlacaMod = new GTextField(window,10,60,100,20);
+    GTextField txfPlacaMod = new GTextField(window,70,60,100,20);
     txfPlacaMod.setPromptText("Digite Placa");
-    GTextField txfIdPlazaMod = new GTextField(window,150,60,100,20);
+    GTextField txfIdPlazaMod = new GTextField(window,70,90,120,20);
     txfIdPlazaMod.setPromptText("nueva ubicacion");
     GButton bAplica = new GButton(window,80,125,100,35,"Aplicar");
     bAplica.fireAllEvents(true);
-    GLabel ldMod= new GLabel(window,0,10,250,25);
+    GLabel ldMod= new GLabel(window,0,10,250  ,25);
     ldMod.setText("ingrese Vehiculo a mover y plaza nueva");
 
     //modSQL();
