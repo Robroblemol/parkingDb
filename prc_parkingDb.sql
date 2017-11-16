@@ -191,7 +191,7 @@ DELIMITER %%
         UPDATE plazas SET estado = true WHERE id=NEW.idPlaza;
         UPDATE plazas SET estado = false WHERE id=OLD.idPlaza;
     END;
-    %%      
+    %%
   -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>
   DROP TRIGGER IF EXISTS trg_setPlazaMoto;
   DELIMITER %%
@@ -200,6 +200,17 @@ DELIMITER %%
     ON motos FOR EACH ROW
     BEGIN
         UPDATE plazaMotos SET estado = true WHERE id=NEW.idPlaza;
+    END;
+    %%
+  -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  DROP TRIGGER IF EXISTS trg_setEditPlazaMoto;
+  DELIMITER %%
+    CREATE TRIGGER trg_setEditPlazaMoto -- nombre del trigger
+    AFTER UPDATE --  Antes de borrar
+    ON motos FOR EACH ROW
+    BEGIN
+        UPDATE plazaMotos SET estado = true WHERE id=NEW.idPlaza;
+        UPDATE plazaMotos SET estado = false WHERE id=OLD.idPlaza;
     END;
     %%
   -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
