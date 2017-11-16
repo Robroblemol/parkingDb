@@ -57,12 +57,13 @@ void getVehicleSQL(String pl ) {
 String s = "";
   if(pl.equals("*")==false){
     if(!flagMoto){
+      //msql.next();
       msql.query("CALL prc_getVehicule('"+pl+"')");
-      msql.next();
       }else{
+        //msql.next();
         msql.query("CALL prc_getMoto('"+pl+"')");
-        msql.next();
       }
+      msql.next();
       s = "Id: "+ msql.getString(1)+" N° Plaza: "+
       msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
       " Fecha entrada: "+msql.getString(4)+"\n";
@@ -82,14 +83,15 @@ String getAllVehicleSQL(String pl) {
   }
   int l = msql.getInt(1);
   String s = "";
+  if(!flagMoto){
+    msql.query("SELECT * FROM vehiculos");//carro
+    //msql.next();
+  }else{
+    msql.query("SELECT * FROM motos");
+    //msql.next();
+  }
   for(int i = 0;i < l ;i++){
-    if(!flagMoto){
-      msql.query("SELECT * FROM vehiculos");//carro
-      msql.next();
-    }else{
-      msql.query("SELECT * FROM motos");
-      msql.next();
-    }
+    msql.next();
     s = s + "Id: "+ msql.getString(1)+" N° Plaza: "+
     msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
     " Fecha entrada: "+msql.getString(4)+"\n";
