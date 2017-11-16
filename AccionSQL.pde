@@ -97,11 +97,11 @@ String getAllVehicleSQL() {
   return s;
 }
 String getAllVehicleSQL(String v) {
-  msql.query("SELECT Count (*) FROM" +v);
+  msql.query("SELECT Count (*) FROM " +v);
   msql.next();
   int l = msql.getInt(1);
   String s = "";
-  msql.query("SELECT * FROM"+ v);//carro
+  msql.query("SELECT * FROM "+ v);//carro
   for(int i = 0;i < l ;i++){
     msql.next();
     s = s + "Id: "+ msql.getString(1)+" N° Plaza: "+
@@ -137,7 +137,9 @@ void getNoPresentes(String pl) {
   String s;
   if(!pl.equals("*")){
     s = "CALL prc_getNopresente('"+pl+"')";
+    println(s);
     msql.query(s);
+    msql.next();
     s = "Id: "+ msql.getString(1)+" N° Plaza: "+
     msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
     " Fecha entrada: "+msql.getString(4)+"\nFecha de salida: "+msql.getString(5);

@@ -96,9 +96,12 @@ public void handleButtonEvents(GButton button, GEvent event) {
      println("bAplica: me presionaron!!");
      int i = int(txfIdPlazaMod.getText());
        modSQL(txfPlacaMod.getText(),i);
-
      //window.exit();
-
+   }
+   if(button==bNoPres && event==GEvent.PRESSED){
+     println("bNoPres: me presionaron!!");
+       getNoPresentes(txfPlaca.getText());   
+     //window.exit();
    }
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
