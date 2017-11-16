@@ -73,7 +73,7 @@ String s = "";
   txa1.setText(s);
 
 }
-String getAllVehicleSQL(String pl) {
+String getAllVehicleSQL() {
   if(!flagMoto){
     msql.query("SELECT Count (*) FROM vehiculos");//carro
     msql.next();
@@ -93,6 +93,20 @@ String getAllVehicleSQL(String pl) {
     s = s + "Id: "+ msql.getString(1)+" N° Plaza: "+
     msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
     " Fecha entrada: "+msql.getString(4)+"\n";
+  }
+  return s;
+}
+String getAllVehicleSQL(String v) {
+  msql.query("SELECT Count (*) FROM" +v);
+  msql.next();
+  int l = msql.getInt(1);
+  String s = "";
+  msql.query("SELECT * FROM"+ v);//carro
+  for(int i = 0;i < l ;i++){
+    msql.next();
+    s = s + "Id: "+ msql.getString(1)+" N° Plaza: "+
+    msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
+    " Fecha entrada: "+msql.getString(4)+"\nFecha de salida: "+msql.getString(5);
   }
   return s;
 }
@@ -117,4 +131,18 @@ void modSQL(String pl, int id){
   //msql.query(s);//carro
   //msql.next();
   //int reply = G4P.selectOption(this, "Digite", "prueba", G4P.INFO, G4P.YES_NO);
+}
+
+void getNoPresentes(String pl) {
+  String s;
+  if(!pl.equals("*")){
+    s = "CALL prc_getNopresente('"+pl+"')";
+    msql.query(s);
+    s = "Id: "+ msql.getString(1)+" N° Plaza: "+
+    msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
+    " Fecha entrada: "+msql.getString(4)+"\nFecha de salida: "+msql.getString(5);
+  }else{
+    s=getAllVehicleSQL("nopresentes");
+  }
+    txa1.setText(s);
 }
