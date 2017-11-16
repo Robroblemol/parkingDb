@@ -85,10 +85,8 @@ String getAllVehicleSQL(String pl) {
   String s = "";
   if(!flagMoto){
     msql.query("SELECT * FROM vehiculos");//carro
-    //msql.next();
   }else{
     msql.query("SELECT * FROM motos");
-    //msql.next();
   }
   for(int i = 0;i < l ;i++){
     msql.next();
