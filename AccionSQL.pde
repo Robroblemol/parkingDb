@@ -68,7 +68,7 @@ String s = "";
       msql.getString(2)+"\nPlaca Vehiculo: "+msql.getString(3)+
       " Fecha entrada: "+msql.getString(4)+"\n";
   }else{
-    s = getAllVehicleSQL(pl);
+    s = getAllVehicleSQL();
   }
   txa1.setText(s);
 
