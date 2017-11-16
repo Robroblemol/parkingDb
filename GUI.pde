@@ -1,7 +1,7 @@
 import g4p_controls.*;//importamos libreria
 
 GLabel lbTitle,lbEditVehiculo,lbBorrar,lbgetVehiculo;
-GButton bAdd,bSelect,bRm,bEdit;
+GButton bAdd,bSelect,bRm,bEdit,bNoPres;
 GTextField txfPlaca;
 GOption optMoto;
 GTextArea txa1;
@@ -33,6 +33,8 @@ void createControlGruop( ) {
   bRm.fireAllEvents(true);
   bEdit = new GButton(this,400,125,100,35,"Modificar Plaza");
   bEdit.fireAllEvents(true);
+  bNoPres = new GButton(this,290,80,100,35,"Buscar no presentes");
+  bNoPres.fireAllEvents(true);
 
   txfPlaca = new GTextField(this, 70, 80, 100, 20);
   txfPlaca.tag = "txfPlaca";
