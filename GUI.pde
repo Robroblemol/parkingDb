@@ -7,6 +7,8 @@ GOption optMoto;
 GTextArea txa1;
 GWindow window;
 public static GButton bAplica; //captura le datos de la ventana editar
+GTextField txfPlacaMod;
+GTextField txfIdPlazaMod;
 Boolean flagMoto = false;
 PlazaCreator pCreator;
 Plaza  pA,pM;
@@ -62,9 +64,9 @@ void createControlGruop( ) {
 void newWindow(){
   window = GWindow.getWindow(this, "Mover Plaza", 500, 250, 245, 230, JAVA2D);
   window.addDrawHandler(this, "drawWin");
-  GTextField txfPlacaMod = new GTextField(window,70,60,100,20);
-  txfPlacaMod.setPromptText("Digite Placa");
-  GTextField txfIdPlazaMod = new GTextField(window,70,90,120,20);
+  txfPlacaMod = new GTextField(window,70,60,100,20);
+  txfPlacaMod.setText(txfPlaca.getText());
+  txfIdPlazaMod = new GTextField(window,70,90,120,20);
   txfIdPlazaMod.setPromptText("nueva ubicacion");
   bAplica = new GButton(window,80,125,100,35,"Aplicar");
   bAplica.fireAllEvents(true);
@@ -87,10 +89,14 @@ public void handleButtonEvents(GButton button, GEvent event) {
   if(button==bEdit &&event==GEvent.PRESSED){
     println("bEdit: me presionaron!!");
     newWindow();
-    //modSQL();
   }
    if(button==bAplica&&event==GEvent.PRESSED){
      println("bAplica: me presionaron!!");
+     int i = int(txfIdPlazaMod.getText());
+       modSQL(txfPlacaMod.getText(),i);
+
+     //window.exit();
+
    }
 }
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {

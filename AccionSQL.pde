@@ -96,7 +96,25 @@ String getAllVehicleSQL(String pl) {
   }
   return s;
 }
-void modSQL(){
+void modSQL(String pl, int id){
+  String s = "";
+  if(!flagMoto){
+    s = "CALL prc_editVehicule('"+pl+"',"+id+")";
+    dP.setEstado(true,true,id);
+  }else{
+    s="CALL prc_editMoto('"+pl+"',"+id+")";
+    dP.setEstado(false,true,id);
+  }
+  println(s);
+  try{
+    msql.next();
+    msql.query(s);//carro
+  }catch(RuntimeException e){
+    G4P.showMessage(this, "Por favor digite una plaza valida", "Plaza Ocupada",
+    G4P.ERROR );
+  }
 
-  int reply = G4P.selectOption(this, "Digite", "prueba", G4P.INFO, G4P.YES_NO);
+  //msql.query(s);//carro
+  //msql.next();
+  //int reply = G4P.selectOption(this, "Digite", "prueba", G4P.INFO, G4P.YES_NO);
 }
